@@ -1,0 +1,9 @@
+services:
+  mysql:
+   container_name: gestao_vagas
+   image: mysql:8.4
+   ports:
+     - '3337:3337'
+   environment:
+   - MYSQL_ROOT_PASSWORD=1234
+   
