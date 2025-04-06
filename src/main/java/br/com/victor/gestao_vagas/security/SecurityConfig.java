@@ -1,14 +1,20 @@
 package br.com.victor.gestao_vagas.security;
 
+import java.nio.file.attribute.BasicFileAttributeView;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 public class SecurityConfig {
+  @Autowired
+  private SecutityFilter secutityFilter;
 
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -16,17 +22,17 @@ public class SecurityConfig {
         .authorizeHttpRequests(auth -> {
           auth.requestMatchers("/candidate/").permitAll()
               .requestMatchers("/company/").permitAll()
-              .requestMatchers("/auth/company").permitAll()
-              ;
+              .requestMatchers("/auth/company").permitAll();
           auth.anyRequest().authenticated();
-        });
+        })
+        .addFilterBefore(secutityFilter, BasicAuthenticationFilter.class);
     return http.build();
   }
 
   @Bean
-  public PasswordEncoder passwordEncoder(){
+  public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
-  //10minuto
+  // 10minuto
 
 }
