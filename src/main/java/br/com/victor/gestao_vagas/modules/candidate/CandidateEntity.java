@@ -15,54 +15,24 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-@Entity (name = "candidate")
+@Entity(name = "candidate")
 public class CandidateEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
-  private String name;
-  @Pattern(regexp = "\\S+", message = "O campo [username] não deve conter espaço")
-  private String username;
-  @Email(message = "O campo deve conter um [email] válido")
-  private String email;
-  @Length(min = 9, max = 100, message = "A senha deve conter entre 9 e 100 caracteres")
-  private String password;
-  private String description;
-  private String curriculum;
-@CreationTimestamp
-  private LocalDateTime createdAt;
+    private String name;
+    @Pattern(regexp = "\\S+", message = "O campo [username] não deve conter espaço")
+    private String username;
+    @Email(message = "O campo deve conter um [email] válido")
+    private String email;
+    @Length(min = 9, max = 100, message = "A senha deve conter entre 9 e 100 caracteres")
+    private String password;
+    private String description;
+    private String curriculum;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
-  public String getPassword() {
-    return password;
-  }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public UUID getId() {
-    return id;
-  }
-
-  public void setId(UUID id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getUsername() {
-    return username;
-  }
-
-  public void setUsername(String username) {
-    this.username = username;
-  }
 }
